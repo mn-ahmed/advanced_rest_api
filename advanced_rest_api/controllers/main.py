@@ -14,7 +14,7 @@ from odoo.http import request
 from odoo.exceptions import AccessError, AccessDenied
 
 _logger = logging.getLogger(__name__)
-expires_in = "advanced_rest_api.dn_access_token_expires_in"
+expires_in = "advanced_rest_api.access_token_expires_in"
 
 
 def validate_token(func):
