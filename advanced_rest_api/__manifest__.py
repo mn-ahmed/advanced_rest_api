@@ -186,6 +186,6 @@ Overall, Advanced REST API for Odoo is a valuable tool for developers looking to
 
     'application': True,
     'images': [
-        'static/description/module_image.jpg',
+        'static/description/main.jpg',
     ],
 }
