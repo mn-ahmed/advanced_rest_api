@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Rest Api</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+      /* Custom styles */
+      .oe_slogan {
+        color: #1c4375;
+      }
+
+      /* Add custom class to sections */
+      section.oe_section {
+        margin-top: 10px;
+        padding: 20px;
+      }
+
+      /* Add custom class to sections */
+      section.oe_dark {
+        background-color: #f5f5f5;
+        color: #1c4375;
+      }
+.custom-code {
+  background-color: black;
+  color: white;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: left !important;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+<section class="oe_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="oe_slogan text-left">Advanced Rest Api</h1>
+            </div>
+            <div class="col-12">
+                <h2 class="oe_slogan text-left">An HTTP-based API for managing data in odoo</h2>
+            </div>
+            <div class="col-12">
+                <p class="text-left">
+                    Advanced Rest Api is a powerful tool that allows you to access and modify data stored in your odoo
+                    database using simple HTTP requests. Whether you need to fetch data, create new records, update
+                    existing ones, or delete them, advanced_rest_api makes it easy to do so, by sending the appropriate
+                    request in JSON format. The response can be chosen to be in either JSON or XML format. With
+                    advanced_rest_api, you can easily automate data management tasks, integrate your odoo with other
+                    systems, and build custom applications that rely on the data stored in your odoo. </p>
+
+                <p>
+                    The RESTful API allows developers to access data stored in Odoo, such as customer information, sales data, and inventory levels, as well as perform actions like creating new records, updating existing ones, and deleting data. The API can also be used to trigger workflows, such as generating invoices or creating new sales orders.
+                </p>
+                <p>Note: Before start:<br/>
+                1) Open odoo.conf<br/>
+                2) Add 'dbfilter = dbname'.<br/>
+                3) Restart odoo service.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="oe_section oe_dark text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="oe_slogan">How to use Advanced Rest API</h2>
+            </div>
+            <div class="col-12">
+                <hr style="border-top: 3px solid #1c4375; width: 46px; margin: 2rem 0 2rem 0">
+            </div>
+            <div class="col-12">
+                <div class="container">
+                    <h2>Create token</h2>
+                    <div class="row">
+
+                        <div class="col text-left">
+                            <p class="text-left">
+                            <br/>
+                            Request Type : GET<br/>
+                            End Point : {{base_url}}/api/auth/token<br/>
+                            Header : {"content_type":"application/x-www-form-urlencoded"}
+                            <br/>
+                            </p>
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+db:Database_name
+login:User_login
+password:User_password
+                          </code>
+                        </pre>
+                        </div>
+                        <div class="col">
+                            <p class="col text-left">
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+{
+    "state": "Success",
+    "uid": 6,
+    "name": "Marc Demo",
+    "user_context": {
+        "lang": "en_US",
+        "tz": "Europe/Brussels",
+        "uid": 6
+    },
+    "company_id": 1,
+    "company_ids": [
+        1
+    ],
+    "access_token": "access_token_0a9b7f89c1c44668b25e0273706b0bf80a66b314",
+    "expires_in": "31536000"
+}
+                          </code>
+                        </pre>                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h2>Search record from sale.order</h2>
+                    <div class="row">
+
+                        <div class="col text-left">
+                            <p class="text-left">
+                            <br/>
+                            Request Type : GET<br/>
+                            End Point : {{base_url}}/api/sale.order<br/>
+                            Header : {"api_key":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            "content_type":"application/json"}
+                            <br/>
+                            </p>
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+{ "fields":"['id','partner_id',]", "domain":"[('id','=',23)]"}
+                          </code>
+                        </pre>
+                            <p><b>Fields</b> represent the individual data elements of a record in the database, by
+                                including
+                                them in
+                                the fields parameter of your request, you can retrieve only the information you need.
+                                For
+                                example, if you only want to retrieve the name, email, and phone number of a customer,
+                                you would
+                                include those fields in your request.
+                                <br/>On the other hand, <b>domain</b> allows you to filter
+                                your
+                                request by specifying conditions that the records must satisfy in order to be included
+                                in the
+                                result, this way you can retrieve only the specific subset of records you need."
+                            </p>
+</p>
+                        </div>
+                        <div class="col">
+                            <p class="col text-left">
+                            <pre class="custom-code">
+                          <code class="text-left">
+{
+    "jsonrpc": "2.0",
+    "id": null,
+    "result": {
+        "status": 200,
+        "state": "Success",
+        "count": 1,
+        "data": [
+            {
+                "id": 23,
+                "partner_id": [
+                    10,
+                    "Deco Addict"
+                ],
+                "date_order": "2023-01-06 08:45:15"
+            }
+        ]
+    }
+}                          </code>
+                        </pre>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h2>Update data</h2>
+                    <div class="row">
+
+                        <div class="col text-left">
+                            <p class="text-left">
+                            <br/>
+                            Request Type : PUT<br/>
+                            End Point : {{base_url}}"/api/sale.order"<br/>
+                            Header : {"api_key":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            "content_type":"application/json"}
+                            <br/>
+                            </p>
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+{"payload" : {"reference": "your reference"}, "id":[23]}
+                          </code>
+                        </pre>
+                        </div>
+                        <div class="col">
+                            <p class="col text-left">
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+{
+    "jsonrpc": "2.0",
+    "id": [
+        23
+    ],
+    "result": {
+        "status": 200,
+        "state": "Success",
+        "message": "update sale.order record [23] successfully!"
+    }
+}
+                          </code>
+                        </pre>                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <h2>Call function</h2>
+                    <div class="row">
+
+                        <div class="col text-left">
+                            <p class="text-left">
+                            <br/>
+                            Request Type : PATCH<br/>
+                            End Point : {{base_url}}"/api_function/sale.order/23"<br/>
+                            Header : {"api_key":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                            "application/x-www-form-urlencoded"}
+                            <br/>
+                            </p>
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+action:action_confirm
+                          </code>
+                        </pre>
+
+                            <p class="col text-left">
+
+                            <pre class="custom-code">
+                          <code class="text-left">
+{
+    "state": "Success",
+    "message": "record 23 has been successfully patched"
+}
+                          </code>
+                        </pre>                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="oe_section oe_dark text-center">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Contact / Support</h2>
+            <h3 class="oe_slogan">Need help or want extra features?</h3>
+        </div>
+        <div class="oe_span6">
+            <div class="oe_demo oe_picture oe_screenshot">
+                <a><img src="main.png"></a>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <p class="oe_mt32">
+                Need help with the configuration or want this module to have more
+                functionalities? <br> <b>Contact us on</b>
+            </p>
+            <ul class="list-group">
+                <li class="list-group-item ">E Mail : <a href="mailto:"
+                                                         contact="">medconsultantweb@gmail.com@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        Crossorigin="anonymous"></script>
+</body>
+</html>
