@@ -181,6 +181,7 @@ Overall, Advanced REST API for Odoo is a valuable tool for developers looking to
     "data": [
             "data/ir_config_param.xml",
             "security/ir.model.access.csv",
+            "views/res_users.xml",
             ],
 
     'application': True,
