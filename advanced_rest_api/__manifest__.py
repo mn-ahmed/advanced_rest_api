@@ -176,7 +176,7 @@ Overall, Advanced REST API for Odoo is a valuable tool for developers looking to
     'category': 'Extra Tools',
     'price': 85,
     'currency': 'EUR',
-    'version': '15.0.0.0',
+    'version': '16.0.0.0',
     'depends': ['base'],
     "data": [
             "data/ir_config_param.xml",
